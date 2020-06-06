@@ -18,7 +18,7 @@
   </div>
 </template>
 <script>
-  import axios from 'axios';
+  import * as authApi from '@/api/auth';
 
   export default {
     data() {
@@ -29,13 +29,10 @@
     },
     methods: {
       login() {
-        axios.post('http://localhost:3000/login', {
-          userid: this.userid,
-          password: this.password
-        }).then(response => {
+        authApi.login(this.userid, this.password).then(response => {
           console.log(response.data.token);
         }).catch(error => {
-          console.error(error.response);
+          console.log(error);
         });
       }
     }

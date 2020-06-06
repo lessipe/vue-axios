@@ -18,6 +18,8 @@
   </div>
 </template>
 <script>
+  import * as boardApi from '@/api/board';
+
   export default {
     data() {
       return {
@@ -27,7 +29,11 @@
     },
     methods: {
       write() {
-
+        boardApi.store(this.title, this.content).then(response => {
+          console.log(response);
+        }).catch(error => {
+          console.error(error);
+        })
       }
     }
   }
