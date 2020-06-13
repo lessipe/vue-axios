@@ -15,4 +15,16 @@ instance.interceptors.request.use(function (config) {
   return config;
 });
 
+instance.interceptors.response.use(function (response) {
+  store.commit('error/setValidationError', {});
+
+  return response;
+}, function (error) {
+  if (error.response.status === 422) {
+    store.commit('error/setValidationError', error.response.data.data);
+  } else {
+    return Promise.reject(error);
+  }
+});
+
 export default instance;
