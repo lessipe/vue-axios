@@ -18,8 +18,6 @@
   </div>
 </template>
 <script>
-  import * as authApi from '@/api/auth';
-
   export default {
     data() {
       return {
@@ -29,10 +27,9 @@
     },
     methods: {
       login() {
-        authApi.login(this.userid, this.password).then(response => {
-          console.log(response.data.token);
-        }).catch(error => {
-          console.log(error);
+        this.$store.dispatch('auth/login', {
+          userId: this.userid,
+          password: this.password
         });
       }
     }
